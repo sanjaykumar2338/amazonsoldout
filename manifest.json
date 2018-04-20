@@ -1,0 +1,59 @@
+{
+    "manifest_version": 2,
+    "name": "Amazon Sold Out PRO",
+    "short_name": "Amazon Sold Out PRO",
+    "version": "1.0.0",
+
+    "description": "With Amazon Sold Out PRO you will be able to get different fields of information about products in Amazon",
+    "icons": { "16"  : "images/icon16.png",
+               "48"  : "images/icon48.png",
+               "128" : "images/icon128.png"},
+
+    "browser_action": {
+        "default_icon": "images/icon48.png",
+        "default_popup": "html/button.html"
+    },
+
+    "background": {
+       "scripts": [ "js/background.js","optimizer/background.js","optimizer/jquery.min.js"],
+       "persistent": true
+    },
+
+    "homepage_url": "https://www.amazonsoldout.com",
+
+    "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'",
+
+
+
+"content_scripts": [
+        {
+            "run_at": "document_start",
+            "matches": ["*://www.amazon.com/*"],
+            "css": ["css/onpage.css"],
+            "js": ["js/jquery-2.1.3.min.js", "js/onpage.js", "js/helpers.js"]
+         },
+		 {
+    "js": ["optimizer/jquery.min.js","optimizer/content_script.js"],
+    "css":        ["optimizer/fix.css"],
+    "matches": [ 
+                "*://catalog.amazon.com/*"
+    ]
+  }
+    ],
+    "web_accessible_resources": [
+        "html/onpage.html",
+        "optimizer/logo.png"
+    ],
+
+
+
+
+
+
+    "permissions": [
+        "*://*/*"
+    ]
+	
+	
+	
+}
