@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Amazon Sold Out PRO",
-    "short_name": "Amazon Sold Out PRO",
+    "name": "Amazon Sold Out PRO - Test Version",
+    "short_name": "Amazon Sold Out PRO - Test Version",
     "version": "1.0.0",
 
     "description": "With Amazon Sold Out PRO you will be able to get different fields of information about products in Amazon",
@@ -15,13 +15,11 @@
     },
 
     "background": {
-       "scripts": [ "js/background.js","optimizer/background.js","optimizer/jquery.min.js"],
+       "scripts": [ "js/background.js","optimizer/background.js","optimizer/jquery.min.js","script/background.js"],
        "persistent": true
     },
 
-    "homepage_url": "https://www.amazonsoldout.com",
-
-    "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'",
+    "homepage_url": "https://www.amazonsoldout.com",  
 
 
 
@@ -48,10 +46,11 @@
 
 
 
-
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
     "permissions": [
-        "*://*/*"
+        "*://*/*",
+        "storage"
     ]
 	
 	

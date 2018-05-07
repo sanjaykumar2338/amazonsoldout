@@ -190,34 +190,7 @@ a:hover{
         margin-top: -4px;
         height: 20px;
     }
-.search-bar {
-    background-color: transparent !important;
-    width: 200px !important;
-    float: left !important;
-    max-width: 100%;
-    margin-bottom: 10px !important;
-}
-.search-bar input.search, .search-bar input.search:active, .search-bar input.search:visited, .search-bar input.search:focus {
-    width: 200px !important;
-    z-index: 9 !important;
-    margin-bottom: 20px;
-    float: left !important;
-    height: 38px !important;
-    border-radius: 30px !important;
-    border: 1px solid #e0e0e0 !important;
-    padding-left: 10px;
-    outline: none;
-}
 
-#price-history-popup .modal-dialog {
-    width: 920px;
-    margin: 30px auto;
-}
-#price-history-popup div.w500px {
-    width: 900px;
-    overflow: hidden;
-    float: left;
-}
 
 .footer {
     background: #DBDBF5;
@@ -900,30 +873,6 @@ h3, h2{
     background-position: right 10px top 32px, right 10px bottom 14px!important;
     background-size: 8px!important;
 }
-#main-table tr th:first-child { background-image: none !important; padding-top: 22px !important; padding-bottom: 0 !important; position:relative; overflow: visible !important; text-align: center;}
-button.toggle_btn:active,
-button.toggle_btn:focus{ border: none; outline: 0 none; }
-button.toggle_btn{ background-color: #ff9900; height: 17px; padding: 0; width: 20px; position:relative; border:0 none; -webkit-border-radius:0; -moz-border-radius:0; -ms-border-radius:0; -o-border-radius:0; border-radius:0; cursor:pointer;}
-button.toggle_btn:before{ background-color: #ebecec; height: 4px; width: 100%; top:3px; left:0; position:absolute; content:"";}
-button.toggle_btn:after{ background-color: #ebecec; height: 4px; width: 100%; bottom:3px; left:0; position:absolute; content:"";}
-#main-table tr th #menu-options-column-number,
-.operation-popup #menu-options-column-number{ position:absolute; left:10px; top:100%; padding:0; -webkit-box-shadow:0 0 5px #333; -moz-box-shadow:0 0 5px #333; -ms-box-shadow:0 0 5px #333; -o-box-shadow:0 0 5px #333; box-shadow:0 0 5px #333; border:0 none;}
-#main-table tr th #menu-options-column-number a,
-.operation-popup #menu-options-column-number a{ font-size:14px; text-align: left; font-weight:400; padding:5px 10px; text-transform: none; border-bottom: 1px solid #f1f1f1;}
-.operation-popup{ width: 20px; float: left; margin: 20px 30px 0 0;}
-
-/*#main-table{ table-layout: fixed; min-width:100%; }
-#main-table tr th.sorting{ background-position: right 28px !important; padding-right:20px;}*/
-
-.filter-option-div .search-bar {display:none !important;}
-#main-table_filter.dataTables_filter{position: fixed; top: 7px; right: 275px; z-index: 999;}
-#main-table_filter.dataTables_filter label input{width: 200px !important;
-    z-index: 9 !important;
-    height: 38px !important;
-    border-radius: 30px !important;
-    border: 1px solid #e0e0e0 !important;
-    padding-left: 10px;
-    outline: none;}
 
 
 /*fba fees*/
@@ -2256,7 +2205,4 @@ table.all-sellers a:hover{
     background-size: 20px 20px;
     color: transparent;
     display: inline-block;
-}
-a {
-    cursor: pointer;
 }
