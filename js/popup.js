@@ -8,44 +8,33 @@ $(document).ready(function() {
 	    {
 	        $('#menu-options-column-number').hide();
 	    }
-	})
-
+	});
 
 	//hide a default column
 	var hideDefaultColumn = function(){
-		$('.parentAsinCol').hide();
-		$('.eanCol').hide();
-		$('.upcCol').hide();	
-		$('.similarProductCol').hide();
-		$('.studioCol').hide();
-		$('.manufacturerCol').hide();		
+		//show default columns
+		//key refer to class and value refer to ID
+		var myArray = {srCol: 'hasPopup', asinCol: 'ASIN',parentAsinCol: 'ParentASIN',productNameCol:'Title',brandCol:'Brand',priceCol:'LowestRefurbishedPrice',publisherCol: 'ComposedRank',warrantyCol: 'Warranty',estimatedCol: 'EstSales',estimatedRevenueCol: 'EstRevenue',saleRankCol: 'SalesRank',fbaCol: 'FBATablefee',ratingCol: 'Rating',reviewCol: 'NumOfReviews',categoryCol: 'Category',imageCol:'Image',eanCol:'EAN',upcCol:'UPC',similarProductCol: 'SimilarProduct',studioCol:'Studio',manufacturerCol:'Manufacturer',numberSellerNewCol:'TotalNew',numberSellerUsedCol: 'TotalUsed',lowestPriceCol:'LowestNewPrice',numberSellerRefurbishedCol: 'TotalRefurbished',weightCol:'Weight',weightLbCol: 'WeightLB',bindingCol:'Binding',priceHistoryCol:'EvolutionPriceRank',partNumberCol:'PartNumber',packageQuantityCol: 'PackageQuantity',packageDimensionsCol:'PackageDimensions',editorialReviewCol: 'EditorialReview',mpnCol: 'MPN',fullSaleRankCol: 'fullsaleranks',languageCol:'Languages',releaseDateCol: 'ReleaseDate',publicationDateCol:'PublicationDate',authorCol:'Author',numberOfPagesCol:'NumberOfPages',formatCol:'Format',productGroupCol:'ProductGroup',isAadultProductCol:'IsAdultProduct',lowestUsedPriceCol:'LowestUsedPrice'};
 
-		$('.numberSellerNewCol').hide();		
-		$('.numberSellerUsedCol').hide();		
-		$('.lowestPriceCol').hide();	
-		$('.numberSellerRefurbishedCol').hide();
-		$('.weightCol').hide();			
-		$('.weightLbCol').hide();		
-		$('.bindingCol').hide();					
-		$('.priceHistoryCol').hide();	
-		$('.partNumberCol').hide();		
-		$('.packageQuantityCol').hide();	
-		$('.packageDimensionsCol').hide();	
-		$('.editorialReviewCol').hide();	
-		$('.mpnCol').hide();	
-		$('.fullSaleRankCol').hide();
-		$('.languageCol').hide();
-		$('.releaseDateCol').hide();
-		$('.publicationDateCol').hide();
-		$('.authorCol').hide();	
-		$('.numberOfPagesCol').hide();	
-		$('.formatCol').hide();	
-		$('.productGroupCol').hide();	
-		$('.isAadultProductCol').hide();
-		$('.lowestUsedPriceCol').hide();		
+		for (var key in myArray) {			
+			if(!localStorage.getItem(key)){
+				$('#'+myArray[key]).prop('checked', true);			
+				$('.'+key).show();
+			}else{	
+				if(localStorage.getItem(key) == 'yes'){						
+					$('#'+myArray[key]).prop('checked', true);			
+					$('.'+key).show();
+				}else {						
+					$('#'+myArray[key]).prop('checked', false);
+					$('.'+key).hide();
+				}	
+			}	
+		}
+			
 	}
 
 	hideDefaultColumn();
+
 
 	//append loader for the new content
 	var appendLoader = function(){
@@ -185,7 +174,7 @@ $(document).ready(function() {
 		var url = localStorage.getItem('currentURL'); 	
 		//Default scrap page
 		if(!url){
-			url = 'https://www.amazon.com/ref=nav_logo';
+			url = 'https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dtoys-and-games&field-keywords=baby';
 		}
 		
 		return url;
@@ -530,6 +519,11 @@ $(document).ready(function() {
 				_that.find('.fullSaleRankCol').html(ces);	
 				_that.find('.ratingCol').text(review_count_c);								
 				_that.find('.reviewCol').text(rating_r);					
+		    },error: function (jqXHR, exception) {
+		    	_that.find('.saleRankCol').html('');
+			 	_that.find('.fullSaleRankCol').html('');	
+				_that.find('.ratingCol').text('');								
+				_that.find('.reviewCol').text('');	
 		    },							
 		 });
 	   });		   
@@ -563,6 +557,28 @@ $(document).ready(function() {
 		$('.full-ranked').html(src);
 		$('#full-rank-popup').modal('show');
 	});
+
+	//open a link of search web page
+    $(document).on('click', '#get-link', function(e){        
+        e.preventDefault();
+        var url = localStorage.getItem('currentURL'); 
+        window.open(url);
+     });
+
+    // Increase Font Size
+    $(document).on('click', '.act-font-plus',function(){
+      var currentSize = $('.dataTable td').css('font-size');
+      var currentSize = parseFloat(currentSize)*1.2;
+      $('.dataTable td').css('font-size', currentSize);
+    });
+
+    // Decrease Font Size
+    $(document).on('click', '.act-font-minus',function(){
+      var currentFontSize = $('.dataTable td').css('font-size');
+      var currentSize = $('.dataTable td').css('font-size');
+      var currentSize = parseFloat(currentSize)*0.8;
+      $('.dataTable td').css('font-size', currentSize);
+    });
 
 	// show editorial Review
 	$(document).on('click', '.editorialReviewAnc', function(e){	
@@ -653,7 +669,10 @@ $(document).ready(function() {
 		var str = search_val;
 		str = search_val.replace(/\s+/g, '+').toLowerCase();		
 
-		var url  = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3D"+category_val[1]+"&field-keywords="+str;		
+		var url  = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3D"+category_val[1]+"&field-keywords="+str;	
+
+		localStorage.setItem('currentURL',url);
+
 		$('#search-keyword').modal('hide');	
 		$('.tablesorter-filter-row').hide();			
 		startScrap(url);		
@@ -689,9 +708,12 @@ $(document).ready(function() {
     //enable / disable setting
     $(document).on('click','.colToShow', function(){   
         var target_col =  $(this).data('col');
-        if($(this).is(':checked')){
+        if($(this).is(':checked')){                
+        	localStorage.setItem(target_col, 'yes');        	        	
             $('.'+target_col).show();
+
         }else{
+        	localStorage.setItem(target_col, 'no');         	
             $('.'+target_col).hide();
         }
     });
@@ -722,7 +744,10 @@ $(document).ready(function() {
 		var str = '';
 		str = keyword.replace(/\s+/g, '+').toLowerCase();		
 
-		var url  = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3D"+category+"&field-keywords="+str;				
+		var url  = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3D"+category+"&field-keywords="+str;
+		
+		localStorage.setItem('currentURL',url);
+
 		startScrap(url);	
 	}
 

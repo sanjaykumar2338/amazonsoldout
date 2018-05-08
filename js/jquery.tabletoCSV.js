@@ -14,12 +14,16 @@ jQuery.fn.tableToCSV = function (options) {
         $(this).find('tr').each(function () {
             var data = [];
             $(this).find('th').each(function () {
+               if($(this).is(":visible")){ 
                 var text = clean_text($(this).text());
                 title.push(text);
+               } 
             });
             $(this).find('td').each(function () {
+              if($(this).is(":visible")){   
                 var text = clean_text($(this).text());
                 data.push(text);
+              } 
             });
             data = data.join(",");
             rows.push(data);
@@ -58,12 +62,16 @@ jQuery.fn.tableToCSVSelected = function (options) {
         $(this).find('tr.active-line-cb').each(function () {
             var data = [];
             $(this).find('th').each(function () {
-                var text = clean_text($(this).text());
-                title.push(text);
+                if($(this).is(":visible")){ 
+                    var text = clean_text($(this).text());
+                    title.push(text);
+                }
             });
             $(this).find('td').each(function () {
-                var text = clean_text($(this).text());
-                data.push(text);
+                if($(this).is(":visible")){ 
+                    var text = clean_text($(this).text());
+                    data.push(text);
+                }
             });
             data = data.join(",");
             rows.push(data);
